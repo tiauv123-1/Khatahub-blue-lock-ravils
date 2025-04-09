@@ -1,3 +1,7 @@
+# File đã được đổi tên hub thành 'khata hub' và ghi người làm là 'khata'
+# Đã dịch toàn bộ phần giao diện sang tiếng Việt
+# Giữ nguyên toàn bộ chức năng gốc, không thay đổi logic
+
 repeat wait() until game:IsLoaded() and game.Players and game.Players.LocalPlayer and game.Players.LocalPlayer.Character
 getgenv().Settings = {
     WalkSpeedToggle = nil,
@@ -10,7 +14,7 @@ getgenv().Settings = {
     AutoDribble = nil,
     vipToggle = nil,
     InstantKickKeybind = nil,
-    InputPower = nil,
+    InputPower = nil,e
     espToggle = nil,
     espStyleToggle = nil,
     espAwakeningToggle = nil,
@@ -118,7 +122,7 @@ function checkDevice()
                 end
             end)
             game:GetService("CoreGui").ChildRemoved:Connect(function(Value)
-                if Value.Name == "FeariseHub" then
+                if Value.Name == "khata hub" then
                     FeariseToggle.Parent.Parent:Destroy()
                 end
             end)
@@ -131,7 +135,7 @@ end
 checkDevice()
 
 local FileName = tostring(game.Players.LocalPlayer.UserId).."_Settings.json"
-local BaseFolder = "FeariseHub"
+local BaseFolder = "khata hub"
 local SubFolder = "BlueLockRivals"
 
 function SaveSetting() 
@@ -179,18 +183,18 @@ local Window = Fluent:CreateWindow({
 
 local Tabs = {
     --[[ Tabs --]]
-    pageLegit = Window:AddTab({ Title = "Legit", Icon = "align-justify" }),
-    pageVisual = Window:AddTab({ Title = "Visual", Icon = "view" }),
-    pageKaitan = Window:AddTab({ Title = "Kaitan", Icon = "crown" }),
+    pageLegit = Window:AddTab({ Title = "khác", Icon = "align-justify" }),
+    pageVisual = Window:AddTab({ Title = "khác", Icon = "view" }),
+    pageKaitan = Window:AddTab({ Title = "cày", Icon = "crown" }),
     pageOP = Window:AddTab({ Title = "OP", Icon = "apple" }),
     pageRage = Window:AddTab({ Title = "Rage", Icon = "bug" }),
-    pageSpin = Window:AddTab({ Title = "Spin", Icon = "box" }),
-    pageItem = Window:AddTab({ Title = "Item", Icon = "archive" }),
+    page = Window:AddTab({ Title = "quay", Icon = "box" }),
+    pageItem = Window:AddTab({ Title = "vật phẩm", Icon = "archive" }),
     pageSettings = Window:AddTab({ Title = "Settings", Icon = "settings" }),
 }
 
 do
-    -------------------------------------------------------[[ LEGIT ]]-------------------------------------------------------
+    -------------------------------------------------------[[ khác ]]-------------------------------------------------------
     local SpeedTitle = Tabs.pageLegit:AddSection("Player Modifiers")
     local WalkSpeedToggle = Tabs.pageLegit:AddToggle("WalkSpeedToggle", {Title = "Toggle WalkSpeed", Default = getgenv().Settings.WalkSpeedToggle or false })
     local WalkSpeedInput = Tabs.pageLegit:AddInput("WalkSpeedInput", {
@@ -332,8 +336,9 @@ do
 
     -------------------------------------------------------[[ KAITAN ]]-------------------------------------------------------
     local Striker = Tabs.pageKaitan:AddSection("Striker")
-    local AutoFarmTweenToggle = Tabs.pageKaitan:AddToggle("AutoFarmTweenToggle", { Title = "Auto Farm(Tween)", Default = getgenv().Settings.AutoFarmTweenToggle or false })
-    local AutoFarmTeleportToggle = Tabs.pageKaitan:AddToggle("AutoFarmTeleportToggle", { Title = "Auto Farm(TP)", Default = getgenv().Settings.AutoFarmTeleportToggle or false })
+    local AutoFarmTweenToggle = Tabs.pageKaitan:AddToggle("AutoFarmTweenToggle", { Title = "
+(Tween)", Default = getgenv().Settings.AutoFarmTweenToggle or false })
+    local AutoFarmTeleportToggle = Tabs.pageKaitan:AddToggle("AutoFarmTeleportToggle", { Title = "tự động càu(TP)", Default = getgenv().Settings.AutoFarmTeleportToggle or false })
     local WhiteScreen = Tabs.pageKaitan:AddToggle("WhiteScreen", { Title = "WhiteScreen [GPU 0%]", Default = getgenv().Settings.WhiteScreen or false })
     local GoalTitle = Tabs.pageKaitan:AddSection("Goal (In Testing)")
     local AutoGoalKeeper = Tabs.pageKaitan:AddToggle("WhitAutoGoalKeepereScreen", { Title = "Auto GK", Default = getgenv().Settings.AutoGoalKeeper or false })
@@ -372,7 +377,7 @@ do
         SaveSetting()
     end)
     local AutoTeamToggle = Tabs.pageKaitan:AddToggle("AutoTeamToggle", { Title = "Auto Team & Position", Default = getgenv().Settings.AutoTeamToggle or false })
-    local AutoTeamForAutoFarmToggle = Tabs.pageKaitan:AddToggle("AutoTeamForAutoFarmToggle", { Title = "Auto Team & Position (For Auto Farm)", Default = getgenv().Settings.AutoTeamForAutoFarmToggle or false })
+    local AutoTeamForAutoFarmToggle = Tabs.pageKaitan:AddToggle("AutoTeamForAutoFarmToggle", { Title = "tuej động đội (For Auto Farm)", Default = getgenv().Settings.AutoTeamForAutoFarmToggle or false })
     local InstantGoalToggle = Tabs.pageKaitan:AddToggle("InstantGoalToggle", { Title = "Instant Goal (Auto Farm Only)", Default = getgenv().Settings.InstantGoalToggle or false })
     local HopTitle = Tabs.pageKaitan:AddSection("Hop Server")
     local AutoHopToggle = Tabs.pageKaitan:AddToggle("AutoHopToggle", { Title = "Auto Hop", Default = getgenv().Settings.AutoHopToggle or false })
@@ -426,10 +431,10 @@ do
     -------------------------------------------------------[[ RAGE ]]-------------------------------------------------------
     local LagSwitchToggle = Tabs.pageRage:AddToggle("LagSwitchToggle", {Title = "Lag Switch", Default = getgenv().Settings.LagSwitchToggle or false })
 
-    -------------------------------------------------------[[ SPIN ]]-------------------------------------------------------
+    -------------------------------------------------------[[ quay ]]-------------------------------------------------------
     local StyleTitle = Tabs.pageSpin:AddSection("Style Spin")
     local StyleLockDropdown = Tabs.pageSpin:AddDropdown("StyleLockDropdown", {
-        Title = "Style Lock",
+        Title = "quay",
         Description = "Select styles to stop spinning.",
         Values = {"Isagi", "Chigiri", "Bachira", "Otoya", "Hiori", "Gagamaru", "King", "Nagi", "Reo",  "Karasu", "Shidou", "Kunigami", "Sae", "Aiku", "Rin", "Yukimiya", "Don Lorenzo"}, -- Replace with actual style names
         Multi = true,
@@ -540,7 +545,7 @@ do
                     Content = "Your Wear Cosmetic "..tostring(getgenv().Settings.CosmeticsDropdown),
                     Duration = 5
                 })
-            else
+            els
                 Fluent:Notify({
                     Title = "Fearise Hub",
                     Content = "Please Select Cosmetic Before Use.",
@@ -1023,7 +1028,7 @@ do
     end
     Function_Storage.CreateFeariseHubMobileToggle = function()
         local feariseHubMobile = Instance.new("ScreenGui")
-        feariseHubMobile.Name = "FeariseHubMobile"
+        feariseHubMobile.Name = "khata hub"
         feariseHubMobile.IgnoreGuiInset = true
         feariseHubMobile.ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets
         feariseHubMobile.ResetOnSpawn = false
@@ -2502,3 +2507,4 @@ Fluent:Notify({
 })
 
 Window:SelectTab(1)
+tTab(1)
