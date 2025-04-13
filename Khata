@@ -1,7 +1,3 @@
-# File đã được đổi tên hub thành 'khata hub' và ghi người làm là 'khata'
-# Đã dịch toàn bộ phần giao diện sang tiếng Việt
-# Giữ nguyên toàn bộ chức năng gốc, không thay đổi logic
-
 repeat wait() until game:IsLoaded() and game.Players and game.Players.LocalPlayer and game.Players.LocalPlayer.Character
 getgenv().Settings = {
     WalkSpeedToggle = nil,
@@ -14,7 +10,7 @@ getgenv().Settings = {
     AutoDribble = nil,
     vipToggle = nil,
     InstantKickKeybind = nil,
-    InputPower = nil,e
+    InputPower = nil,
     espToggle = nil,
     espStyleToggle = nil,
     espAwakeningToggle = nil,
@@ -109,10 +105,10 @@ function checkDevice()
         local UserInputService = game:GetService("UserInputService")
         
         if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled then
-            local FeariseToggle = CreateToggle()
-            FeariseToggle.MouseButton1Click:Connect(function()
+            local KhataToggle = CreateToggle()
+            KhataToggle.MouseButton1Click:Connect(function()
                 for _, guiObject in ipairs(game:GetService("CoreGui"):GetChildren()) do
-                    if guiObject.Name == "FeariseHub" and guiObject:IsA("ScreenGui") then
+                    if guiObject.Name == "KhataHub" and guiObject:IsA("ScreenGui") then
                         for FrameIndex, FrameValue in pairs(guiObject:GetChildren()) do
                             if FrameValue:IsA("Frame") and FrameValue:FindFirstChild("CanvasGroup") then
                                 FrameValue.Visible = not FrameValue.Visible
@@ -122,8 +118,8 @@ function checkDevice()
                 end
             end)
             game:GetService("CoreGui").ChildRemoved:Connect(function(Value)
-                if Value.Name == "khata hub" then
-                    FeariseToggle.Parent.Parent:Destroy()
+                if Value.Name == "KhataHub" then
+                    KhataToggle.Parent.Parent:Destroy()
                 end
             end)
             Device = UDim2.fromOffset(480, 360)
@@ -135,7 +131,7 @@ end
 checkDevice()
 
 local FileName = tostring(game.Players.LocalPlayer.UserId).."_Settings.json"
-local BaseFolder = "khata hub"
+local BaseFolder = "KhataHub"
 local SubFolder = "BlueLockRivals"
 
 function SaveSetting() 
@@ -167,12 +163,12 @@ end
 
 LoadSetting()
 
-local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/UnlessDahell/FeariseHub/refs/heads/main/Fearise_UI"))()
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/UnlessDahell/FeariseHub/refs/heads/main/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/UnlessDahell/FeariseHub/refs/heads/main/InterfaceManager.lua"))()
+local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/UnlessDahell/fearise/refs/heads/main/Khata_UI"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/UnlessDahell/fearise/refs/heads/main/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/UnlessDahell/fearise/refs/heads/main/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "khata hub" .. " | ".."BlueLock : Rival".." | ".."[Version 3]",
+    Title = "Khata Hub" .. " | ".."BlueLock : Rival".." | ".."[Version 3]",
     SubTitle = "by khata",
     TabWidth = 160,
     Size =  Device, --UDim2.fromOffset(480, 360), --default size (580, 460)
@@ -183,22 +179,22 @@ local Window = Fluent:CreateWindow({
 
 local Tabs = {
     --[[ Tabs --]]
-    pageLegit = Window:AddTab({ Title = "khác", Icon = "align-justify" }),
-    pageVisual = Window:AddTab({ Title = "khác", Icon = "view" }),
-    pageKaitan = Window:AddTab({ Title = "cày", Icon = "crown" }),
-    pageOP = Window:AddTab({ Title = "OP", Icon = "apple" }),
-    pageRage = Window:AddTab({ Title = "Rage", Icon = "bug" }),
-    page = Window:AddTab({ Title = "quay", Icon = "box" }),
-    pageItem = Window:AddTab({ Title = "vật phẩm", Icon = "archive" }),
-    pageSettings = Window:AddTab({ Title = "Settings", Icon = "settings" }),
+    pageLegit = Window:AddTab({ Title = "Hỗ Trợ Cơ Bản", Icon = "align-justify" }),
+    pageVisual = Window:AddTab({ Title = "Hiển Thị ESP", Icon = "view" }),
+    pageKaitan = Window:AddTab({ Title = "Farm", Icon = "crown" }),
+    pageOP = Window:AddTab({ Title = "Kỹ Năng Mạnh", Icon = "apple" }),
+    pageRage = Window:AddTab({ Title = "Phá Game", Icon = "bug" }),
+    pageSpin = Window:AddTab({ Title = "Quay", Icon = "box" }),
+    pageItem = Window:AddTab({ Title = "Vật Phẩm", Icon = "archive" }),
+    pageSettings = Window:AddTab({ Title = "Cài Đặt", Icon = "settings" }),
 }
 
 do
-    -------------------------------------------------------[[ khác ]]-------------------------------------------------------
+    -------------------------------------------------------[[ LEGIT ]]-------------------------------------------------------
     local SpeedTitle = Tabs.pageLegit:AddSection("Player Modifiers")
-    local WalkSpeedToggle = Tabs.pageLegit:AddToggle("WalkSpeedToggle", {Title = "Toggle WalkSpeed", Default = getgenv().Settings.WalkSpeedToggle or false })
+    local WalkSpeedToggle = Tabs.pageLegit:AddToggle("WalkSpeedToggle", {Title = "Bật/Tắt Tốc Độ Di Chuyển", Default = getgenv().Settings.WalkSpeedToggle or false })
     local WalkSpeedInput = Tabs.pageLegit:AddInput("WalkSpeedInput", {
-        Title = "WalkSpeed Input",
+        Title = "Nhập Tốc Độ Di Chuyển",
         Default = getgenv().Settings.WalkSpeedInput or 16,
         Numeric = true,
         Finished = false,
@@ -211,9 +207,9 @@ do
         getgenv().Settings.WalkSpeedInput = Value
         SaveSetting()
     end)
-    local JumpPowerToggle = Tabs.pageLegit:AddToggle("JumpPowerToggle", {Title = "Toggle JumpPower", Default = getgenv().Settings.JumpPowerToggle or false })
+    local JumpPowerToggle = Tabs.pageLegit:AddToggle("JumpPowerToggle", {Title = "Bật/Tắt Độ Cao Khi Nhảy", Default = getgenv().Settings.JumpPowerToggle or false })
     local JumpPowerInput = Tabs.pageLegit:AddInput("JumpPowerInput", {
-        Title = "JumpPower Input",
+        Title = "Nhập Độ Cao Khi Nhảy",
         Default = getgenv().Settings.JumpPowerInput or 50,
         Numeric = true,
         Finished = false,
@@ -227,9 +223,9 @@ do
         SaveSetting()
     end)
     local HitboxTitle = Tabs.pageLegit:AddSection("Hitbox")
-    local HitboxToggle = Tabs.pageLegit:AddToggle("HitboxToggle", { Title = "Hitbox", Default = getgenv().Settings.HitboxToggle or false })
+    local HitboxToggle = Tabs.pageLegit:AddToggle("HitboxToggle", { Title = "Mở Rộng Vùng Chạm", Default = getgenv().Settings.HitboxToggle or false })
     local HitboxInput = Tabs.pageLegit:AddInput("HitboxInput", {
-        Title = "Hitbox Input",
+        Title = "Nhập Kích Thước Hitbox",
         Default = getgenv().Settings.HitboxInput or 10,
         Placeholder = "Enter size (1-30)",
         Numeric = true,
@@ -244,7 +240,7 @@ do
         SaveSetting()
     end)
     local HitboxKeybind = Tabs.pageLegit:AddKeybind("HitboxKeybind", {
-        Title = "Toggle Hitbox Keybind",
+        Title = "Phím Tắt Bật/Tắt Hitbox",
         Mode = "Toggle",
         Default = "",
         Callback = function(Value)
@@ -255,23 +251,23 @@ do
         end
     })
     local MiscTitle = Tabs.pageLegit:AddSection("Misc")
-    local AutoDribble = Tabs.pageLegit:AddToggle("AutoDribble", {Title = "AutoDribble", Description = "Testing.", Default = getgenv().Settings.AutoDribble or false })
-    local vipToggle = Tabs.pageLegit:AddToggle("vipToggle", {Title = "vipToggle", Description = "Testing.", Default = getgenv().Settings.vipToggle or false })
+    local AutoDribble = Tabs.pageLegit:AddToggle("AutoDribble", {Title = "Tự Dẫn Bóng", Description = "Testing.", Default = getgenv().Settings.AutoDribble or false })
+    local vipToggle = Tabs.pageLegit:AddToggle("vipToggle", {Title = "Chế Độ VIP", Description = "Testing.", Default = getgenv().Settings.vipToggle or false })
     local InfiniteStaminaButton Tabs.pageLegit:AddButton({
-        Title = "Infinite Stamina",
+        Title = "Thể Lực Vô Hạn",
         Description = "Click to enable Infinite Stamina (cannot be disabled)",
         Callback = function()
             if not getgenv().Settings.InfiniteStamina then
                 getgenv().Settings.InfiniteStamina = true
                 SaveSetting()
                 Fluent:Notify({
-                    Title = "Infinite Stamina",
+                    Title = "Thể Lực Vô Hạn",
                     Content = "Enabled",
                     Duration = 3
                 })
             else
                 Fluent:Notify({
-                    Title = "Infinite Stamina",
+                    Title = "Thể Lực Vô Hạn",
                     Content = "Already Enabled",
                     Duration = 3
                 })
@@ -300,7 +296,7 @@ do
     end)
     local EnchantedTitle = Tabs.pageLegit:AddSection("Enchanted")
     local InstantKickKeybind = Tabs.pageLegit:AddKeybind("InstantKickKeybind", {
-        Title = "Shoot Keybind",
+        Title = "Phím Sút Bóng",
         Mode = "Toggle",
         Default = "",
         Callback = function(Value)
@@ -327,23 +323,22 @@ do
     end)
 
     -------------------------------------------------------[[ VISUAL ]]-------------------------------------------------------
-    local espToggle = Tabs.pageVisual:AddToggle("espToggle", {Title = "Enable ESP", Default = getgenv().Settings.espToggle or false })
-    local espStyleToggle = Tabs.pageVisual:AddToggle("espStyleToggle", {Title = "Enable Style", Default = getgenv().Settings.espStyleToggle or false })
-    local espAwakeningToggle = Tabs.pageVisual:AddToggle("espAwakeningToggle", {Title = "Enable Awakning", Default = getgenv().Settings.espAwakeningToggle or false })
-    local espFlowToggle = Tabs.pageVisual:AddToggle("espFlowToggle", {Title = "Enable Flow", Default = getgenv().Settings.espFlowToggle or false })
-    local espStaminaToggle = Tabs.pageVisual:AddToggle("espStaminaToggle", {Title = "Enable Stamina", Default = getgenv().Settings.espStaminaToggle or false })
-    local BallPredicToggle = Tabs.pageVisual:AddToggle("BallPredicToggle", {Title = "ESP BallPredic", Default = getgenv().Settings.BallPredicToggle or false})
+    local espToggle = Tabs.pageVisual:AddToggle("espToggle", {Title = "Bật ESP", Default = getgenv().Settings.espToggle or false })
+    local espStyleToggle = Tabs.pageVisual:AddToggle("espStyleToggle", {Title = "Hiển Thị Phong Cách", Default = getgenv().Settings.espStyleToggle or false })
+    local espAwakeningToggle = Tabs.pageVisual:AddToggle("espAwakeningToggle", {Title = "Hiển Thị Thức Tỉnh", Default = getgenv().Settings.espAwakeningToggle or false })
+    local espFlowToggle = Tabs.pageVisual:AddToggle("espFlowToggle", {Title = "Hiển Thị Flow", Default = getgenv().Settings.espFlowToggle or false })
+    local espStaminaToggle = Tabs.pageVisual:AddToggle("espStaminaToggle", {Title = "Hiển Thị Thể Lực", Default = getgenv().Settings.espStaminaToggle or false })
+    local BallPredicToggle = Tabs.pageVisual:AddToggle("BallPredicToggle", {Title = "Dự Đoán Bóng (ESP)", Default = getgenv().Settings.BallPredicToggle or false})
 
     -------------------------------------------------------[[ KAITAN ]]-------------------------------------------------------
     local Striker = Tabs.pageKaitan:AddSection("Striker")
-    local AutoFarmTweenToggle = Tabs.pageKaitan:AddToggle("AutoFarmTweenToggle", { Title = "
-(Tween)", Default = getgenv().Settings.AutoFarmTweenToggle or false })
-    local AutoFarmTeleportToggle = Tabs.pageKaitan:AddToggle("AutoFarmTeleportToggle", { Title = "tự động càu(TP)", Default = getgenv().Settings.AutoFarmTeleportToggle or false })
+    local AutoFarmTweenToggle = Tabs.pageKaitan:AddToggle("AutoFarmTweenToggle", { Title = "Tự Farm (Tween)", Default = getgenv().Settings.AutoFarmTweenToggle or false })
+    local AutoFarmTeleportToggle = Tabs.pageKaitan:AddToggle("AutoFarmTeleportToggle", { Title = "Tự Farm (Dịch Chuyển)", Default = getgenv().Settings.AutoFarmTeleportToggle or false })
     local WhiteScreen = Tabs.pageKaitan:AddToggle("WhiteScreen", { Title = "WhiteScreen [GPU 0%]", Default = getgenv().Settings.WhiteScreen or false })
     local GoalTitle = Tabs.pageKaitan:AddSection("Goal (In Testing)")
-    local AutoGoalKeeper = Tabs.pageKaitan:AddToggle("WhitAutoGoalKeepereScreen", { Title = "Auto GK", Default = getgenv().Settings.AutoGoalKeeper or false })
+    local AutoGoalKeeper = Tabs.pageKaitan:AddToggle("WhitAutoGoalKeepereScreen", { Title = "Tự Bắt Gôn", Default = getgenv().Settings.AutoGoalKeeper or false })
     local AutoGKKeybind = Tabs.pageKaitan:AddKeybind("AutoGKKeybind", {
-        Title = "Auto GK Keybind",
+        Title = "Phím Bắt Gôn Tự Động",
         Mode = "Toggle",
         Default = "",
         Callback = function(Value)
@@ -359,7 +354,7 @@ do
     -- end)
     local Properties = Tabs.pageKaitan:AddSection("Properties")
     local TeamPositionDropdown = Tabs.pageKaitan:AddDropdown("TeamPositionDropdown", {
-        Title = "Team and Position",
+        Title = "Đội & Vị Trí",
         Description = "Select your preferred team and position.",
         Values = {
             "Home_CF", "Home_LW", "Home_RW", "Home_CM", "Home_DM", "Home_CB", "Home_GK",
@@ -376,13 +371,13 @@ do
         getgenv().Settings.TeamPositionDropdown = Value
         SaveSetting()
     end)
-    local AutoTeamToggle = Tabs.pageKaitan:AddToggle("AutoTeamToggle", { Title = "Auto Team & Position", Default = getgenv().Settings.AutoTeamToggle or false })
-    local AutoTeamForAutoFarmToggle = Tabs.pageKaitan:AddToggle("AutoTeamForAutoFarmToggle", { Title = "tuej động đội (For Auto Farm)", Default = getgenv().Settings.AutoTeamForAutoFarmToggle or false })
-    local InstantGoalToggle = Tabs.pageKaitan:AddToggle("InstantGoalToggle", { Title = "Instant Goal (Auto Farm Only)", Default = getgenv().Settings.InstantGoalToggle or false })
+    local AutoTeamToggle = Tabs.pageKaitan:AddToggle("AutoTeamToggle", { Title = "Tự Chọn Đội & Vị Trí", Default = getgenv().Settings.AutoTeamToggle or false })
+    local AutoTeamForAutoFarmToggle = Tabs.pageKaitan:AddToggle("AutoTeamForAutoFarmToggle", { Title = "Tự Chọn Đội (Dùng Farm)", Default = getgenv().Settings.AutoTeamForAutoFarmToggle or false })
+    local InstantGoalToggle = Tabs.pageKaitan:AddToggle("InstantGoalToggle", { Title = "Sút Gôn Ngay (Chỉ Auto Farm)", Default = getgenv().Settings.InstantGoalToggle or false })
     local HopTitle = Tabs.pageKaitan:AddSection("Hop Server")
-    local AutoHopToggle = Tabs.pageKaitan:AddToggle("AutoHopToggle", { Title = "Auto Hop", Default = getgenv().Settings.AutoHopToggle or false })
+    local AutoHopToggle = Tabs.pageKaitan:AddToggle("AutoHopToggle", { Title = "Tự Đổi Server", Default = getgenv().Settings.AutoHopToggle or false })
     local AutoHopThresholdInput = Tabs.pageKaitan:AddInput("AutoHopThresholdInput", {
-        Title = "Auto Hop When Players ≤",
+        Title = "Đổi Server Khi Người Chơi ≤",
         Description = "ย้ายเซิฟหากผู้เล่นน้อยกว่า",
         Default = getgenv().Settings.AutoHopThresholdInput or 4,
         Placeholder = "Enter Number Of Players",
@@ -399,9 +394,9 @@ do
     end)
 
     -------------------------------------------------------[[ OP ]]-------------------------------------------------------
-    local KaiserToggle = Tabs.pageOP:AddToggle("KaiserToggle", { Title = "Kaiser Impack", Default = getgenv().Settings.KaiserToggle or false })
+    local KaiserToggle = Tabs.pageOP:AddToggle("KaiserToggle", { Title = "Kaiser Tấn Công", Default = getgenv().Settings.KaiserToggle or false })
     local KaiserKeybide = Tabs.pageOP:AddKeybind("KaiserKeybide", {
-        Title = "Toggle Kaiser Impack Keybind",
+        Title = "Phím Tắt Kaiser",
         Mode = "Toggle",
         Default = "",
         Callback = function(Value)
@@ -411,9 +406,9 @@ do
             getgenv().Settings.KaiserKeybide = Value
         end
     })
-    local CurveShotProMaxToggle = Tabs.pageOP:AddToggle("CurveShotProMaxToggle", { Title = "Gyro Shot Pro Max", Default = getgenv().Settings.CurveShotProMaxToggle or false })
+    local CurveShotProMaxToggle = Tabs.pageOP:AddToggle("CurveShotProMaxToggle", { Title = "Cú Sút Xoáy Cực Đại", Default = getgenv().Settings.CurveShotProMaxToggle or false })
     local CurveShotProMaxKeybind = Tabs.pageOP:AddKeybind("CurveShotProMaxKeybind", {
-        Title = "Toggle Gyro Shot Keybind",
+        Title = "Phím Sút Xoáy",
         Mode = "Toggle",
         Default = "",
         Callback = function(Value)
@@ -424,17 +419,17 @@ do
         end
     })
     local SkillTitle = Tabs.pageOP:AddSection("No CD Skill (Wave Required)")
-    local NoCooldownStealToggle = Tabs.pageOP:AddToggle("NoCooldownStealToggle", { Title = "No Cooldown - Steal", Default = getgenv().Settings.NoCooldownStealToggle or false })
-    local NoCooldownAirDribbleToggle = Tabs.pageOP:AddToggle("NoCooldownAirDribbleToggle", { Title = "No Cooldown - AirDribble", Default = getgenv().Settings.NoCooldownAirDribbleToggle or false })
-    local NoCooldownAirDashToggle = Tabs.pageOP:AddToggle("NoCooldownAirDashToggle", { Title = "No Cooldown - AirDash", Default = getgenv().Settings.NoCooldownAirDashToggle or false })
+    local NoCooldownStealToggle = Tabs.pageOP:AddToggle("NoCooldownStealToggle", { Title = "Không Delay - Cướp Bóng", Default = getgenv().Settings.NoCooldownStealToggle or false })
+    local NoCooldownAirDribbleToggle = Tabs.pageOP:AddToggle("NoCooldownAirDribbleToggle", { Title = "Không Delay - Dẫn Bóng Trên Không", Default = getgenv().Settings.NoCooldownAirDribbleToggle or false })
+    local NoCooldownAirDashToggle = Tabs.pageOP:AddToggle("NoCooldownAirDashToggle", { Title = "Không Delay - Lướt Trên Không", Default = getgenv().Settings.NoCooldownAirDashToggle or false })
 
     -------------------------------------------------------[[ RAGE ]]-------------------------------------------------------
-    local LagSwitchToggle = Tabs.pageRage:AddToggle("LagSwitchToggle", {Title = "Lag Switch", Default = getgenv().Settings.LagSwitchToggle or false })
+    local LagSwitchToggle = Tabs.pageRage:AddToggle("LagSwitchToggle", {Title = "Chuyển Đổi Lag", Default = getgenv().Settings.LagSwitchToggle or false })
 
-    -------------------------------------------------------[[ quay ]]-------------------------------------------------------
+    -------------------------------------------------------[[ SPIN ]]-------------------------------------------------------
     local StyleTitle = Tabs.pageSpin:AddSection("Style Spin")
     local StyleLockDropdown = Tabs.pageSpin:AddDropdown("StyleLockDropdown", {
-        Title = "quay",
+        Title = "Khóa Phong Cách",
         Description = "Select styles to stop spinning.",
         Values = {"Isagi", "Chigiri", "Bachira", "Otoya", "Hiori", "Gagamaru", "King", "Nagi", "Reo",  "Karasu", "Shidou", "Kunigami", "Sae", "Aiku", "Rin", "Yukimiya", "Don Lorenzo"}, -- Replace with actual style names
         Multi = true,
@@ -448,10 +443,10 @@ do
         getgenv().Settings.StyleLockDropdown = Values
         SaveSetting()
     end)
-    local AutoSpinToggle = Tabs.pageSpin:AddToggle("AutoSpinToggle", { Title = "Auto Style Spin", Default = getgenv().Settings.AutoSpinToggle or false })
+    local AutoSpinToggle = Tabs.pageSpin:AddToggle("AutoSpinToggle", { Title = "Tự Quay Phong Cách", Default = getgenv().Settings.AutoSpinToggle or false })
     local FlowTitle = Tabs.pageSpin:AddSection("Flow Spin")
     local FlowLockDropdown = Tabs.pageSpin:AddDropdown("FlowLockDropdown", {
-        Title = "Flow Lock",
+        Title = "Khóa Flow",
         Description = "Select Flow to stop spinning.",
         Values = { "Ice", "Lightning", "Puzzle", "Monster", "Gale Burst", "Genius", "King's Instinct", "Trap", "Crow", "Demon Wings", "Chameleon", "Wild Card", "Snake", "Prodigy", "Awakened Genius", "Dribbler"}, -- Actual flow names
         Multi = true,
@@ -465,7 +460,7 @@ do
         getgenv().Settings.FlowLockDropdown = Values
         SaveSetting()
     end)
-    local AutoFlowToggle = Tabs.pageSpin:AddToggle("AutoFlowToggle", { Title = "Auto Flow Spin", Default = getgenv().Settings.AutoFlowToggle or false })
+    local AutoFlowToggle = Tabs.pageSpin:AddToggle("AutoFlowToggle", { Title = "Tự Quay Flow", Default = getgenv().Settings.AutoFlowToggle or false })
 
     -------------------------------------------------------[[ ITEM ]]-------------------------------------------------------
     local EffectsTitle = Tabs.pageItem:AddSection("Goal Effects")
@@ -488,7 +483,7 @@ do
     end
     GetAllItem()
     local EffectsDropdown = Tabs.pageItem:AddDropdown("EffectsDropdown", {
-        Title = "Goal Effects",
+        Title = "Hiệu Ứng Khi Ghi Bàn",
         Values = ItemsList.EFX,
         Multi = false,
         Default = getgenv().Settings.EffectsDropdown or "",
@@ -502,18 +497,18 @@ do
         SaveSetting()
     end)
     local ApplyEffectButton = Tabs.pageItem:AddButton({
-        Title = "Apply Effect",
+        Title = "Áp Dụng Hiệu Ứng",
         Callback = function()
             if getgenv().Settings.EffectsDropdown ~= "" then
                 game:GetService("ReplicatedStorage").Packages.Knit.Services.CustomizationService.RE.Customize:FireServer("GoalEffects", getgenv().Settings.EffectsDropdown)
                 Fluent:Notify({
-                    Title = "Fearise Hub",
+                    Title = "Khata Hub",
                     Content = "Your Wear Goal Effect "..tostring(getgenv().Settings.EffectsDropdown),
                     Duration = 5
                 })
             else
                 Fluent:Notify({
-                    Title = "Fearise Hub",
+                    Title = "Khata Hub",
                     Content = "Please Select Goal Effect Before Use.",
                     Duration = 3
                 })
@@ -522,7 +517,7 @@ do
     })
     local CosmeticsTitle = Tabs.pageItem:AddSection("Cosmetics")
     local CosmeticsDropdown = Tabs.pageItem:AddDropdown("CosmeticsDropdown", {
-        Title = "Cosmetics",
+        Title = "Trang Trí Ngoài",
         Values = ItemsList.Cosmatics,
         Multi = false,
         Default = getgenv().Settings.CosmeticsDropdown or "",
@@ -536,18 +531,18 @@ do
         SaveSetting()
     end)
     local ApplyCosmetic = Tabs.pageItem:AddButton({
-        Title = "Apply Cosmetic",
+        Title = "Áp Dụng Trang Trí",
         Callback = function()
             if getgenv().Settings.CosmeticsDropdown ~= "" then
                 game:GetService("ReplicatedStorage").Packages.Knit.Services.CustomizationService.RE.Customize:FireServer("Cosmetics", getgenv().Settings.CosmeticsDropdown)
                 Fluent:Notify({
-                    Title = "Fearise Hub",
+                    Title = "Khata Hub",
                     Content = "Your Wear Cosmetic "..tostring(getgenv().Settings.CosmeticsDropdown),
                     Duration = 5
                 })
-            els
+            else
                 Fluent:Notify({
-                    Title = "Fearise Hub",
+                    Title = "Khata Hub",
                     Content = "Please Select Cosmetic Before Use.",
                     Duration = 3
                 })
@@ -556,7 +551,7 @@ do
     })
     local CardsTitle = Tabs.pageItem:AddSection("Cards")
     local CardsDropdown = Tabs.pageItem:AddDropdown("CardsDropdown", {
-        Title = "Cards",
+        Title = "Thẻ",
         Values = ItemsList.Cards,
         Multi = false,
         Default = getgenv().Settings.CardsDropdown or "",
@@ -570,18 +565,18 @@ do
         SaveSetting()
     end)
     local ApplyCard = Tabs.pageItem:AddButton({
-        Title = "Apply Card",
+        Title = "Áp Dụng Thẻ",
         Callback = function()
             if getgenv().Settings.CardsDropdown ~= "" then
                 game:GetService("ReplicatedStorage").Packages.Knit.Services.CustomizationService.RE.Customize:FireServer("Cards", getgenv().Settings.CardsDropdown)
                 Fluent:Notify({
-                    Title = "Fearise Hub",
+                    Title = "Khata Hub",
                     Content = "Your Wear Card "..tostring(getgenv().Settings.CardsDropdown),
                     Duration = 5
                 })
             else
                 Fluent:Notify({
-                    Title = "Fearise Hub",
+                    Title = "Khata Hub",
                     Content = "Please Select Card Before Use.",
                     Duration = 3
                 })
@@ -1026,9 +1021,9 @@ do
             warn("Failed to retrieve ball object")
         end
     end
-    Function_Storage.CreateFeariseHubMobileToggle = function()
+    Function_Storage.CreateKhataHubMobileToggle = function()
         local feariseHubMobile = Instance.new("ScreenGui")
-        feariseHubMobile.Name = "khata hub"
+        feariseHubMobile.Name = "KhataHubMobile"
         feariseHubMobile.IgnoreGuiInset = true
         feariseHubMobile.ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets
         feariseHubMobile.ResetOnSpawn = false
@@ -2371,7 +2366,7 @@ do
 
                 else
                     Fluent:Notify({
-                        Title = "Auto Flow Spin",
+                        Title = "Tự Quay Flow",
                         Content = "Insufficient Spins or Money.",
                         Duration = 5
                     })
@@ -2390,7 +2385,7 @@ do
             
             if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled then
                 if getgenv().Configs["Mobile Mode"] then
-                    local MobileUI = Function_Storage.CreateFeariseHubMobileToggle()
+                    local MobileUI = Function_Storage.CreateKhataHubMobileToggle()
 
                     MobileUI.instantKickToggle.MouseButton1Click:Connect(function()
                         Function_Storage.shootBall()
@@ -2400,13 +2395,13 @@ do
                         KaiserToggle:SetValue(Debris_Variables.KaiserKeybide.State)
                         if Debris_Variables.KaiserKeybide.State then
                             Fluent:Notify({
-                                Title = "Fearise Hub",
+                                Title = "Khata Hub",
                                 Content = "Kaiser Impack Actived.",
                                 Duration = 3
                             })
                         else
                             Fluent:Notify({
-                                Title = "Fearise Hub",
+                                Title = "Khata Hub",
                                 Content = "Kaiser Impack Not Actived.",
                                 Duration = 3
                             })
@@ -2417,13 +2412,13 @@ do
                         CurveShotProMaxToggle:SetValue(Debris_Variables.CurveShotProMaxKeybind.State)
                         if Debris_Variables.CurveShotProMaxKeybind.State then
                             Fluent:Notify({
-                                Title = "Fearise Hub",
+                                Title = "Khata Hub",
                                 Content = "CurveShotProMax Actived.",
                                 Duration = 3
                             })
                         else
                             Fluent:Notify({
-                                Title = "Fearise Hub",
+                                Title = "Khata Hub",
                                 Content = "CurveShotProMax Not Actived.",
                                 Duration = 3
                             })
@@ -2434,13 +2429,13 @@ do
                         AutoGoalKeeper:SetValue(Debris_Variables.AutoGKKeybind.State)
                         if Debris_Variables.AutoGKKeybind.State then
                             Fluent:Notify({
-                                Title = "Fearise Hub",
+                                Title = "Khata Hub",
                                 Content = "AutoGK Actived.",
                                 Duration = 3
                             })
                         else
                             Fluent:Notify({
-                                Title = "Fearise Hub",
+                                Title = "Khata Hub",
                                 Content = "AutoGK Not Actived.",
                                 Duration = 3
                             })
@@ -2451,20 +2446,20 @@ do
                         HitboxToggle:SetValue(Debris_Variables.HitboxKeybind.State)
                         if Debris_Variables.HitboxKeybind.State then
                             Fluent:Notify({
-                                Title = "Fearise Hub",
+                                Title = "Khata Hub",
                                 Content = "Hitbox Actived.",
                                 Duration = 3
                             })
                         else
                             Fluent:Notify({
-                                Title = "Fearise Hub",
+                                Title = "Khata Hub",
                                 Content = "Hitbox Not Actived.",
                                 Duration = 3
                             })
                         end
                     end)
                     game:GetService("CoreGui").ChildRemoved:Connect(function(Value)
-                        if Value.Name == "FeariseHub" then
+                        if Value.Name == "KhataHub" then
                             MobileUI.feariseHubMobileUI:Destroy()
                         end
                     end)
@@ -2480,8 +2475,8 @@ end
 SaveManager:SetLibrary(Fluent)
 InterfaceManager:SetLibrary(Fluent)
 
-SaveManager:SetFolder("Fearise Hub")
-InterfaceManager:SetFolder("Fearise Hub")
+SaveManager:SetFolder("Khata Hub")
+InterfaceManager:SetFolder("Khata Hub")
 
 SaveManager:BuildConfigSection(Tabs.pageSettings)
 InterfaceManager:BuildInterfaceSection(Tabs.pageSettings)
@@ -2501,10 +2496,9 @@ task.spawn(function()
 end)
 
 Fluent:Notify({
-    Title = "Fearise Hub",
+    Title = "Khata Hub",
     Content = "Anti AFK Is Actived",
     Duration = 5
 })
 
 Window:SelectTab(1)
-tTab(1)
